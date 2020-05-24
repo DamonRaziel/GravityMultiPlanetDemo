@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.92549, 0, 0.760784, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 40, 40, 40 )
+
+[sub_resource type="ConcavePolygonShape" id=3]
+data = PoolVector3Array( -20, 20, 20, 20, 20, 20, -20, -20, 20, 20, 20, 20, 20, -20, 20, -20, -20, 20, 20, 20, -20, -20, 20, -20, 20, -20, -20, -20, 20, -20, -20, -20, -20, 20, -20, -20, 20, 20, 20, 20, 20, -20, 20, -20, 20, 20, 20, -20, 20, -20, -20, 20, -20, 20, -20, 20, -20, -20, 20, 20, -20, -20, -20, -20, 20, 20, -20, -20, 20, -20, -20, -20, 20, 20, 20, -20, 20, 20, 20, 20, -20, -20, 20, 20, -20, 20, -20, 20, 20, -20, -20, -20, 20, 20, -20, 20, -20, -20, -20, 20, -20, 20, 20, -20, -20, -20, -20, -20 )
+
+[node name="Planet03" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 3 )
