@@ -88,18 +88,20 @@ func _process(delta):
 			pass
 
 func change_to_planet():
-	# Turn off the colliders so it doesn't get stuck on current planet
+	# Turn off the ray and colliders so it doesn't get stuck on current planet
 	player_collider_main.disabled = true
 	player_collider_feet.disabled = true
+	ground_ray.enabled = false
 	# Countdown til re-enable the colliders
 	planet_jump_timer.start()
 	# Get the new planet
 	current_planet = target_planet
 
-# Re-enable the colliders after a second
+# Re-enable the ray and colliders after a second
 func _on_P_Jump_Timer_timeout():
 	player_collider_main.disabled = false
 	player_collider_feet.disabled = false
+	ground_ray.enabled = true
 #	current_planet = target_planet
 
 # Accessed from change disc script so that it resets the planet when we step off the discs
@@ -185,8 +187,9 @@ func _physics_process(delta):
 	var grav_vec = Vector3()
 	# I think this is the problem bit, as the ray is still facing towards the old planet
 	if ground_ray.is_colliding():
-		grav_vec = (planet_position - transform.origin).normalized()
-#		grav_vec = -ground_ray.get_collision_normal()
+#		grav_vec = (planet_position - transform.origin).normalized()
+		
+		grav_vec = -ground_ray.get_collision_normal()
 	else:
 		grav_vec = (planet_position - transform.origin).normalized()
 	
